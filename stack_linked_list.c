@@ -8,6 +8,9 @@ struct stack {
     struct stack *next;
 };
 
+struct stack push(struct stack *t, int x);
+struct stack pop();
+
 int main(){
     
     int choice, x;
@@ -19,24 +22,25 @@ int main(){
             printf("1. Push \n 2. Pop \n 3. Display \n 4. Peek \n 5. End Execution");
             scanf("%d", &choice);
             
-            scitch(choice) {
+            switch(choice) {
                 case 1: printf("enter data");
                         scanf("%d", &x);
-                        top = push(&top, x);
+                        top = push(top, x);
                     break;
-                case 2: top = pop();
+                case 2: 
+                    top = pop(top);
                     break;
-                case 3:
-                        display();
-                    break;
-                case 4: 
-                        peek();
-                    break;
+                // case 3:
+                //         display();
+                //     break;
+                // case 4: 
+                //         peek();
+                //     break;
                 case 5: 
                         exit(0);
                 
             }
-        } while(choice >= 1 && ch < 6);
+        } while(choice >= 1 && choice < 6);
         
         
         
@@ -47,7 +51,7 @@ int main(){
 struct stack push(struct stack *t, int x){
     struct stack *p;
     
-    p = (struct stack *) malloc(sizeof(struct stak));
+    p = (struct stack *) malloc(sizeof(struct stack));
     
     p->d = x;
     p->next = NULL;
@@ -63,12 +67,12 @@ struct stack push(struct stack *t, int x){
         t=p;
     }
     
-    return t;
+    return (t);
     
 }
 
 
-int pop(struct stack *t) {
+struct stack pop(struct stack *t) {
     struct stack *p = t;
     
     // int ans;
@@ -80,5 +84,5 @@ int pop(struct stack *t) {
     free(p);
     p=0;
     
-    return t;
+    return (t);
 }
