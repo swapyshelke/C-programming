@@ -8,8 +8,10 @@ struct stack {
     struct stack *next;
 };
 
-struct stack push(struct stack *t, int x);
-struct stack pop();
+struct stack* push(struct stack *t, int x);
+struct stack* pop(struct stack *t);
+void display(struct stack *t);
+int peek(struct stack *t);
 
 int main(){
     
@@ -23,19 +25,20 @@ int main(){
             scanf("%d", &choice);
             
             switch(choice) {
-                case 1: printf("enter data");
+                case 1: 
+                        printf("enter data");
                         scanf("%d", &x);
                         top = push(top, x);
                     break;
                 case 2: 
                     top = pop(top);
                     break;
-                // case 3:
-                //         display();
-                //     break;
-                // case 4: 
-                //         peek();
-                //     break;
+                case 3:
+                        display(top);
+                    break;
+                case 4: 
+                       printf("Top element is: %d\n", peek(top));
+                    break;
                 case 5: 
                         exit(0);
                 
@@ -48,13 +51,13 @@ int main(){
 }
 
 
-struct stack push(struct stack *t, int x){
+struct stack* push(struct stack *t, int x){
     struct stack *p;
     
     p = (struct stack *) malloc(sizeof(struct stack));
     
     p->d = x;
-    p->next = NULL;
+    // p->next = NULL;
     
     if(t == 0) 
         t=p;
@@ -67,12 +70,12 @@ struct stack push(struct stack *t, int x){
         t=p;
     }
     
-    return (t);
+    return t;
     
 }
 
 
-struct stack pop(struct stack *t) {
+struct stack* pop(struct stack *t) {
     struct stack *p = t;
     
     // int ans;
@@ -84,5 +87,35 @@ struct stack pop(struct stack *t) {
     free(p);
     p=0;
     
-    return (t);
+    return t;
 }
+
+void display(struct stack *t){
+    if(t == NULL) {
+        printf("stack is empty. \n");
+        return;
+    }
+    
+    
+    printf("stack elementss: \n");
+    
+    struct stack *p = t;
+    
+    while(p != 0){
+        printf("%d \n", p->d);
+        p = p->next;
+    }
+}
+
+
+
+int peek(struct stack *t) {
+    if(t == NULL) {
+        printf("Stack is empty.\n");
+        return -1;
+    }
+    return t->d;
+}
+
+
+// complete code of Stack Implementation using Linked List
